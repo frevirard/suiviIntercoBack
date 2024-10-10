@@ -3,6 +3,8 @@ package com.example.creato.objets.employee;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
+import com.example.creato.objets.projet.ProjetRepository;
+
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -20,6 +22,9 @@ public class EmployeeController {
     @Autowired
     EmployeeRepository employeeRepository;
 
+    @Autowired
+    ProjetRepository projetRepository;
+
     @PostMapping("/add")
     public Employee postMethodName(@RequestBody Employee Employee) {
         return this.employeeRepository.save(Employee);
@@ -27,7 +32,12 @@ public class EmployeeController {
 
     @GetMapping("/getAll")
     public List<Employee> getAllEmployes() {
-        return this.employeeRepository.findAll();
+        List<Employee> employees = this.employeeRepository.findAll();
+        for (Employee employee : employees) {
+            employee.projets = this.projetRepository.countByAssignee(employee.nomComplet);
+        }
+        ;
+        return employees;
     }
 
     @GetMapping("path")
