@@ -25,5 +25,6 @@ public class Metrics {
     public Long projetsPilotage;
     public Long totalProjet;
     public Long moyenneInterco;
+    public Long moyeneProgression;
     public Long pourcentageNouveau;
 }
