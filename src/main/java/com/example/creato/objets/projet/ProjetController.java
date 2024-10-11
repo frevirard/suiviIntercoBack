@@ -37,7 +37,6 @@ public class ProjetController {
     @DeleteMapping("/delete/{id}")
     public MessageResponse deleteProjet(@PathVariable Long id) {
         this.projetRepository.deleteById(id);
-
         return new MessageResponse("Success");
     }
 

@@ -64,6 +64,7 @@ public class WebSecurityConfig {
                         .requestMatchers("/fred").permitAll()
                         .requestMatchers("/inMemory").permitAll()
                         .requestMatchers("/createRoles").permitAll()
+                        .requestMatchers("/philippe").permitAll()
                         // .requestMatchers("/employee/**").permitAll()
                         .anyRequest().authenticated() // All other endpoints require authentication
                 )

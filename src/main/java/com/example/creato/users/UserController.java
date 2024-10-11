@@ -51,6 +51,20 @@ public class UserController {
         return "Hello StringBoy, need some baby oil ?";
     }
 
+    @GetMapping("/philippe")
+    public String getSomeSring() {
+        User fred = new User();
+        Role role = this.roleRepository.findByName("ADMIN");
+        fred.setRole(role);
+        fred.setEmail("philippe@gmail.com");
+        fred.setPassWord(new BCryptPasswordEncoder().encode("philippe2024"));
+        fred.setUserName("philippe");
+        System.out.println(fred.getPassword());
+        fred.setAccountVerified(false);
+        this.userRepository.save(fred);
+        return "Hello StringBoy, need some baby oil ?";
+    }
+
     @GetMapping("/createRoles")
     public String addRoles() {
         Role admin = new Role();

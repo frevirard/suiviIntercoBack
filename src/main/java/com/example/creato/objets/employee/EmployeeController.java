@@ -3,6 +3,7 @@ package com.example.creato.objets.employee;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
+import com.example.creato.auth.MessageResponse;
 import com.example.creato.objets.projet.ProjetRepository;
 
 import java.util.List;
@@ -13,7 +14,6 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.RequestParam;
 
 @RestController
 @RequestMapping("/employee")
@@ -45,10 +45,10 @@ public class EmployeeController {
         return "fred";
     }
 
-    @DeleteMapping("/delete/{id}")
-    public String deleteEmployee(@PathVariable Long employeeId) {
+    @DeleteMapping("/delete/{employeeId}")
+    public MessageResponse deleteEmployee(@PathVariable Long employeeId) {
         this.employeeRepository.deleteById(employeeId);
-        return "Success";
+        return new MessageResponse("Success");
     }
 
 }

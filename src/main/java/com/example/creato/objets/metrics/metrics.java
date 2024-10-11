@@ -9,7 +9,7 @@ import jakarta.persistence.Table;
 
 @Entity
 @Table(name = "METRICSINTERCO")
-public class metrics {
+public class Metrics {
 
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
@@ -18,10 +18,11 @@ public class metrics {
     public Long projetOuverts;
     public Long projetsCloture;
     public Long projetsTF;
-    public Long projetsIFRS;
+    public Long projetsRisque;
     public Long projetsConso;
     public Long projetsCompta;
     public Long projetsOperation;
     public Long projetsPilotage;
+    public Long totalProjet;
     public Long pourcentageNouveau;
 }
