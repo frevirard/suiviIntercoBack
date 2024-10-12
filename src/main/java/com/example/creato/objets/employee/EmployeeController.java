@@ -14,6 +14,9 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
+import java.time.ZonedDateTime;
+import java.time.format.DateTimeFormatter;
+import java.time.temporal.ChronoUnit;
 
 @RestController
 @RequestMapping("/employee")
@@ -25,9 +28,23 @@ public class EmployeeController {
     @Autowired
     ProjetRepository projetRepository;
 
+    @SuppressWarnings("finally")
     @PostMapping("/add")
-    public Employee postMethodName(@RequestBody Employee Employee) {
-        return this.employeeRepository.save(Employee);
+    public Employee postMethodName(@RequestBody Employee employee) {
+
+        try {
+            String isoDateTime = employee.dateInterco;
+            ZonedDateTime givenDateTime = ZonedDateTime.parse(isoDateTime, DateTimeFormatter.ISO_DATE_TIME);
+            ZonedDateTime currentDateTime = ZonedDateTime.now(givenDateTime.getZone());
+            employee.nbJourInterco = ChronoUnit.DAYS.between(givenDateTime, currentDateTime);
+
+        } catch (Exception e) {
+            // TODO: handle exception
+            employee.nbJourInterco = Long.valueOf(0);
+        }
+
+        return this.employeeRepository.save(employee);
+
     }
 
     @GetMapping("/getAll")

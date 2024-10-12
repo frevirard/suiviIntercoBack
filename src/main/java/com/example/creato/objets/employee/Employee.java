@@ -25,4 +25,5 @@ public class Employee {
     public String mobile;
     public Long projets;
     public String nomComplet;
+    public Long nbJourInterco;
 }

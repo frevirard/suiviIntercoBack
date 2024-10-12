@@ -23,6 +23,6 @@ public class Projet {
     public Long progression;
     public String pole;
     public String dateDebut;
-    public String nbJour;
+    public Long nbJour;
     public String commentaire;
 }
