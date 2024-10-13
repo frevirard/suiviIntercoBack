@@ -97,9 +97,6 @@ public class MetricsController {
                     for (int i = 0; i < 12; i++) {
 
                         if (time.getMonth().name().equals(months.get(i))) {
-                            System.out.println(time.getMonth());
-                            System.out.println(months.get(i));
-                            System.out.println("OK");
                             serieCurrentYear.set(i, serieCurrentYear.get(i) + Long.valueOf(1));
                         }
                     }
