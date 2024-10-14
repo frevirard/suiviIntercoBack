@@ -13,4 +13,6 @@ public interface ProjetRepository extends JpaRepository<Projet, Long> {
     Long countByStatu(String statu);
 
     Long countByAssignee(String Assignee);
+
+    Long countByCategorie(String Assignee);
 }

@@ -51,15 +51,12 @@ public class AuthController {
 
     @PostMapping("/signin")
     public JwtResponse authenticateUser(@RequestBody LoginRequest loginRequest) throws Exception {
-        System.out.println(loginRequest);
         try {
             Authentication authentication = authenticationManager.authenticate(
                     new UsernamePasswordAuthenticationToken(loginRequest.getUsername(), loginRequest.getPassword()));
             SecurityContextHolder.getContext().setAuthentication(authentication);
-            System.out.println("ok");
 
         } catch (BadCredentialsException e) {
-            System.out.println(e);
             throw new Exception("Incorrect username or password", e);
         }
 
@@ -67,7 +64,6 @@ public class AuthController {
         JwtResponse reponse = new JwtResponse();
         reponse.jwt = jwt;
         reponse.userName = loginRequest.getUsername();
-        System.out.println(jwt);
         return reponse;
     }
 

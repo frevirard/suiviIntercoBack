@@ -45,7 +45,6 @@ public class UserController {
         fred.setEmail("frevirard@gmail.com");
         fred.setPassWord(new BCryptPasswordEncoder().encode("331093"));
         fred.setUserName("frevirard");
-        System.out.println(fred.getPassword());
         fred.setAccountVerified(false);
         this.userRepository.save(fred);
         return "Hello StringBoy, need some baby oil ?";
@@ -59,7 +58,6 @@ public class UserController {
         fred.setEmail("philippe@gmail.com");
         fred.setPassWord(new BCryptPasswordEncoder().encode("philippe2024"));
         fred.setUserName("philippe");
-        System.out.println(fred.getPassword());
         fred.setAccountVerified(false);
         this.userRepository.save(fred);
         return "Hello StringBoy, need some baby oil ?";
