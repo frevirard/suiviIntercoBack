@@ -19,7 +19,7 @@ public class TachePlanifiee {
     ProjetRepository projetRepository;
 
     // Exécution toutes les 5 secondes
-    @Scheduled(cron = "0 59 23 * * ?")
+    @Scheduled(cron = "0 01 00 * * ?")
     public void executeTask() {
         List<Projet> projets = this.projetRepository.findAll();
         for (Projet projet : projets) {
