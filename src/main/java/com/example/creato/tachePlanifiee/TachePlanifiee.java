@@ -21,12 +21,25 @@ public class TachePlanifiee {
     // Exécution toutes les 5 secondes
     @Scheduled(cron = "0 59 23 * * ?")
     public void executeTask() {
-        System.out.println("La fuck.");
         List<Projet> projets = this.projetRepository.findAll();
         for (Projet projet : projets) {
             try {
                 EnvoiMail mail = new EnvoiMail();
+                this.actuNbJour(projet);
                 mail.envoiMailNbJourRéussi("Rafraichissement nb jour effectué pour " + projet.titre);
+            } catch (Exception e) {
+                // TODO: handle exception
+                EnvoiMail mail = new EnvoiMail();
+                mail.envoiMailNbJourRéussi("Rafraichissement nb jour échoué pour " + projet.titre);
+            }
+        }
+    }
+
+    @Scheduled(cron = "0 00 05 * * ?")
+    public void executeTaskTwo() {
+        List<Projet> projets = this.projetRepository.findAll();
+        for (Projet projet : projets) {
+            try {
                 this.actuNbJour(projet);
             } catch (Exception e) {
                 // TODO: handle exception
@@ -34,13 +47,6 @@ public class TachePlanifiee {
                 mail.envoiMailNbJourRéussi("Rafraichissement nb jour échoué pour " + projet.titre);
             }
         }
-
-    }
-
-    @Scheduled(cron = "0 00 05 * * ?")
-    public void executeTaskTwo() {
-        EnvoiMail mail = new EnvoiMail();
-        mail.envoiMailNbJourRéussi("Appli fonctionnel");
     }
 
     // @Scheduled(cron = "0 03 22 * * ?")
