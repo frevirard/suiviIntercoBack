@@ -27,7 +27,17 @@ public class ProjetController {
     @PostMapping("add")
     public Projet postMethodName(@RequestBody Projet projet) {
         // TODO: process POST request
-        if (projet.statu != "Cloture") {
+        if (!projet.statu.equals("Cloture")) {
+            String isoDateTime = projet.dateDebut;
+            try {
+                ZonedDateTime givenDateTime = ZonedDateTime.parse(isoDateTime, DateTimeFormatter.ISO_DATE_TIME);
+                ZonedDateTime currentDateTime = ZonedDateTime.now(givenDateTime.getZone());
+                projet.nbJour = ChronoUnit.DAYS.between(givenDateTime, currentDateTime);
+            } catch (Exception e) {
+                // TODO: handle exception
+            }
+
+        } else if (projet.nbJour == null || projet.nbJour == 0) {
             String isoDateTime = projet.dateDebut;
             try {
                 ZonedDateTime givenDateTime = ZonedDateTime.parse(isoDateTime, DateTimeFormatter.ISO_DATE_TIME);

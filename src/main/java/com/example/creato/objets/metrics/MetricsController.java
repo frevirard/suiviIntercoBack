@@ -152,4 +152,9 @@ public class MetricsController {
         return this.projetRepository.countByCategorie(cat);
     }
 
+    @GetMapping("/moyenneTempsCategorie/{cat}")
+    public Double getmoyenneTempsCategorie(@PathVariable String cat) {
+        System.out.println(this.projetRepository.findAverageNbjourByCategorie(cat));
+        return this.projetRepository.findAverageNbjourByCategorie(cat);
+    }
 }

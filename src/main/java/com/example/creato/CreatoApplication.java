@@ -12,8 +12,8 @@ public class CreatoApplication {
 
 	public static void main(String[] args) {
 		SpringApplication.run(CreatoApplication.class, args);
-		EnvoiMail mail = new EnvoiMail();
-		mail.envoiMailNbJourRéussi("Démarrage appli réussie");
+		// EnvoiMail mail = new EnvoiMail();
+		// mail.envoiMailNbJourRéussi("Démarrage appli réussie");
 	}
 
 }

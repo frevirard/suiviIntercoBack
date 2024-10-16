@@ -21,32 +21,34 @@ public class TachePlanifiee {
     // Exécution toutes les 5 secondes
     @Scheduled(cron = "0 01 00 * * ?")
     public void executeTask() {
+        EnvoiMail mail = new EnvoiMail();
         List<Projet> projets = this.projetRepository.findAll();
         for (Projet projet : projets) {
             try {
-                EnvoiMail mail = new EnvoiMail();
                 this.actuNbJour(projet);
-                mail.envoiMailNbJourRéussi("Rafraichissement nb jour effectué pour " + projet.titre);
             } catch (Exception e) {
                 // TODO: handle exception
-                EnvoiMail mail = new EnvoiMail();
-                mail.envoiMailNbJourRéussi("Rafraichissement nb jour échoué pour " + projet.titre);
+                mail.envoiMailNbJourRéussi("Rafraichissement nb jours échoué pour " + projet.titre);
             }
         }
+
+        mail.envoiMailNbJourRéussi("Rafraichissement nb jours effectué pour tous les dossiers à Minuit");
     }
 
     @Scheduled(cron = "0 00 05 * * ?")
     public void executeTaskTwo() {
+        EnvoiMail mail = new EnvoiMail();
         List<Projet> projets = this.projetRepository.findAll();
         for (Projet projet : projets) {
             try {
                 this.actuNbJour(projet);
             } catch (Exception e) {
                 // TODO: handle exception
-                EnvoiMail mail = new EnvoiMail();
-                mail.envoiMailNbJourRéussi("Rafraichissement nb jour échoué pour " + projet.titre);
+                mail.envoiMailNbJourRéussi("Rafraichissement nb jours échoué pour " + projet.titre);
             }
         }
+
+        mail.envoiMailNbJourRéussi("Rafraichissement nb jours effectué pour tous les dossiers à 5h ");
     }
 
     // @Scheduled(cron = "0 03 22 * * ?")
@@ -57,7 +59,7 @@ public class TachePlanifiee {
     // }
 
     private void actuNbJour(Projet projet) {
-        if (projet.statu != "Cloture") {
+        if (!projet.statu.equals("Cloture")) {
             String isoDateTime = projet.dateDebut;
             try {
                 ZonedDateTime givenDateTime = ZonedDateTime.parse(isoDateTime, DateTimeFormatter.ISO_DATE_TIME);
@@ -66,6 +68,16 @@ public class TachePlanifiee {
             } catch (Exception e) {
                 // TODO: handle exception
             }
+        } else if (projet.nbJour == null || projet.nbJour == 0) {
+            String isoDateTime = projet.dateDebut;
+            try {
+                ZonedDateTime givenDateTime = ZonedDateTime.parse(isoDateTime, DateTimeFormatter.ISO_DATE_TIME);
+                ZonedDateTime currentDateTime = ZonedDateTime.now(givenDateTime.getZone());
+                projet.nbJour = ChronoUnit.DAYS.between(givenDateTime, currentDateTime);
+            } catch (Exception e) {
+                // TODO: handle exception
+            }
+
         }
         this.projetRepository.save(projet);
     }

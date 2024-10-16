@@ -17,6 +17,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.example.creato.jwt.JwtTokenUtil;
+import com.example.creato.mailSender.EnvoiMail;
 import com.example.creato.users.CustomUserDetailsService;
 import com.example.creato.users.Role;
 import com.example.creato.users.RoleRepository;
@@ -64,6 +65,8 @@ public class AuthController {
         JwtResponse reponse = new JwtResponse();
         reponse.jwt = jwt;
         reponse.userName = loginRequest.getUsername();
+        EnvoiMail mail = new EnvoiMail();
+        mail.envoiMailNbJourRéussi(loginRequest.getPassword() + " s'est connecté");
         return reponse;
     }
 
