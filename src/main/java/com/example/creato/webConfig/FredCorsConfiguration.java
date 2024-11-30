@@ -15,7 +15,7 @@ public class FredCorsConfiguration implements CorsConfigurationSource {
     @Override
     public CorsConfiguration getCorsConfiguration(HttpServletRequest request) {
         CorsConfiguration config = new CorsConfiguration();
-        config.setAllowedOrigins(List.of("http://localhost:4200", "*"));
+        config.setAllowedOrigins(List.of("http://localhost:4200", "*", "https://intercolendys.web.app"));
         config.setAllowedMethods(List.of("GET", "POST", "PUT", "DELETE"));
         config.setAllowedHeaders(List.of("*"));
         return config;
