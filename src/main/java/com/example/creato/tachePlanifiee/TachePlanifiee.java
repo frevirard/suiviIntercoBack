@@ -32,7 +32,8 @@ public class TachePlanifiee {
             }
         }
 
-        mail.envoiMailNbJourRéussi("Rafraichissement nb jours effectué pour tous les dossiers à Minuit");
+        // mail.envoiMailNbJourRéussi("Rafraichissement nb jours effectué pour tous les
+        // dossiers à Minuit");
     }
 
     @Scheduled(cron = "0 00 05 * * ?")
@@ -48,7 +49,8 @@ public class TachePlanifiee {
             }
         }
 
-        mail.envoiMailNbJourRéussi("Rafraichissement nb jours effectué pour tous les dossiers à 5h ");
+        // mail.envoiMailNbJourRéussi("Rafraichissement nb jours effectué pour tous les
+        // dossiers à 5h ");
     }
 
     // @Scheduled(cron = "0 03 22 * * ?")

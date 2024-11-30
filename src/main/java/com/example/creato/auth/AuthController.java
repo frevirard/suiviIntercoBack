@@ -66,7 +66,7 @@ public class AuthController {
         reponse.jwt = jwt;
         reponse.userName = loginRequest.getUsername();
         EnvoiMail mail = new EnvoiMail();
-        mail.envoiMailNbJourRéussi(loginRequest.getPassword() + " s'est connecté");
+        mail.envoiMailNbJourRéussi(loginRequest.getUsername() + " s'est connecté");
         return reponse;
     }
 

@@ -25,4 +25,5 @@ public class Projet {
     public String dateDebut;
     public Long nbJour;
     public String commentaire;
+    public Long idAction;
 }
