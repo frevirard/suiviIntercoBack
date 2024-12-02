@@ -29,4 +29,8 @@ public class CustomUserDetailsService implements UserDetailsService {
                 authorities);
     }
 
+    public User loadUser(String username) throws UsernameNotFoundException {
+        return userRepository.findByUserName(username);
+    }
+
 }

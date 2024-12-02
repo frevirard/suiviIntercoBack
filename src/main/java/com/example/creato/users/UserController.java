@@ -50,6 +50,16 @@ public class UserController {
         return "Hello StringBoy, need some baby oil ?";
     }
 
+    @GetMapping("/fredUpdate")
+    public String updateFred() {
+        User fred = this.userRepository.findByUserName("frevirard");
+        fred.setAvatar("assets/images/profile/user-0.jpg");
+        fred.setNom("EKEWOU");
+        fred.setPrenom("Frédéric");
+        this.userRepository.save(fred);
+        return "Hello StringBoy, need some baby oil ?";
+    }
+
     @GetMapping("/philippe")
     public String getSomeSring() {
         User fred = new User();

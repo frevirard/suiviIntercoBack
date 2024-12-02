@@ -31,6 +31,9 @@ public class User {
     private String password;
     private boolean acountVerified;
     private String email;
+    private String nom;
+    private String prenom;
+    private String avatar;
     @ManyToMany(fetch = FetchType.EAGER)
     @JoinTable(name = "userinterco_roles", joinColumns = @JoinColumn(name = "user_id"), inverseJoinColumns = @JoinColumn(name = "role_id"))
     private Set<Role> roles = new HashSet<>();
@@ -55,6 +58,18 @@ public class User {
 
     }
 
+    public void setNom(String nom) {
+        this.nom = nom;
+    }
+
+    public void setAvatar(String avatar) {
+        this.avatar = avatar;
+    }
+
+    public void setPrenom(String prenom) {
+        this.prenom = prenom;
+    }
+
     public void setUserName(String userName) {
         this.userName = userName;
     }
@@ -74,4 +89,17 @@ public class User {
     public void setRole(Role role) {
         this.roles.add(role);
     }
+
+    public String getPrenom() {
+        return prenom;
+    }
+
+    public String getNom() {
+        return nom;
+    }
+
+    public String getAvatar() {
+        return avatar;
+    }
+
 }

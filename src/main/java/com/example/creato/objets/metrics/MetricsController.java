@@ -42,8 +42,9 @@ public class MetricsController {
 
         Metrics metrics = new Metrics();
 
-        metrics.projetOuverts = this.projetRepository.countByStatu("Ouvert");
+        metrics.projetsOuverts = this.projetRepository.countByStatu("Ouvert");
         metrics.projetsEncours = this.projetRepository.countByStatu("En cours");
+        metrics.projetsPause = this.projetRepository.countByStatu("Pause");
         metrics.projetsCloture = this.projetRepository.countByStatu("Cloture");
 
         metrics.projetsTF = this.projetRepository.countByPole("Transformation Finance");
@@ -52,7 +53,8 @@ public class MetricsController {
         metrics.projetsOperation = this.projetRepository.countByPole("FSO");
         metrics.projetsPilotage = this.projetRepository.countByPole("Pilotage et Performance");
         metrics.projetsRisque = this.projetRepository.countByPole("Risque et Actuariat");
-        metrics.totalProjet = metrics.projetOuverts + metrics.projetsCloture + metrics.projetsEncours;
+        metrics.totalProjet = metrics.projetsOuverts + metrics.projetsCloture + metrics.projetsEncours
+                + metrics.projetsPause;
         return metrics;
     }
 

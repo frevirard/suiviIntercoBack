@@ -12,6 +12,12 @@ public class SignUpRequest {
 
     private String password;
 
+    private String nom;
+
+    public String prenoms;
+
+    public String avatar;
+
     public String getUsername() {
         return username;
     }
@@ -24,8 +30,32 @@ public class SignUpRequest {
         return email;
     }
 
+    public String getNom() {
+        return nom;
+    }
+
+    public String getAvatar() {
+        return avatar;
+    }
+
+    public String getPrenoms() {
+        return prenoms;
+    }
+
     public void setEmail(String email) {
         this.email = email;
+    }
+
+    public void setAvatar(String avatar) {
+        this.avatar = avatar;
+    }
+
+    public void setNom(String nom) {
+        this.nom = nom;
+    }
+
+    public void setPrenoms(String prenoms) {
+        this.prenoms = prenoms;
     }
 
     public String getPassword() {

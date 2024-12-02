@@ -62,6 +62,7 @@ public class WebSecurityConfig {
                         .requestMatchers("/login").permitAll()
                         .requestMatchers("/auth/signin").permitAll()
                         .requestMatchers("/fred").permitAll()
+                        .requestMatchers("/fredUpdate").permitAll()
                         .requestMatchers("/inMemory").permitAll()
                         .requestMatchers("/createRoles").permitAll()
                         .requestMatchers("/philippe").permitAll()

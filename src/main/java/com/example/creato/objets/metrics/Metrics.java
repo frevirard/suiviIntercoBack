@@ -15,7 +15,8 @@ public class Metrics {
     @GeneratedValue(strategy = GenerationType.AUTO)
     public Long id;
     public Long projetsEncours;
-    public Long projetOuverts;
+    public Long projetsOuverts;
+    public Long projetsPause;
     public Long projetsCloture;
     public Long projetsTF;
     public Long projetsRisque;

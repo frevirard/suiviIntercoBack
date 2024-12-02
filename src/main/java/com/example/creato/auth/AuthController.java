@@ -50,6 +50,9 @@ public class AuthController {
     @Autowired
     RoleRepository roleRepository;
 
+    @Autowired
+    CustomUserDetailsService customUserDetailsService;
+
     @PostMapping("/signin")
     public JwtResponse authenticateUser(@RequestBody LoginRequest loginRequest) throws Exception {
         try {
@@ -64,7 +67,11 @@ public class AuthController {
         String jwt = jwtUtils.generateToken(loginRequest.getUsername());
         JwtResponse reponse = new JwtResponse();
         reponse.jwt = jwt;
+        User user = this.customUserDetailsService.loadUser(loginRequest.getUsername());
         reponse.userName = loginRequest.getUsername();
+        reponse.nom = user.getNom();
+        reponse.prenoms = user.getPrenom();
+        reponse.avatar = user.getAvatar();
         EnvoiMail mail = new EnvoiMail();
         mail.envoiMailNbJourRéussi(loginRequest.getUsername() + " s'est connecté");
         return reponse;
@@ -85,6 +92,9 @@ public class AuthController {
         user.setEmail(signUpRequest.getEmail());
         user.setPassWord(this.encoder.encode(signUpRequest.getPassword()));
         Role role = this.roleRepository.findByName(signUpRequest.getRole());
+        user.setNom(signUpRequest.getNom());
+        user.setAvatar("assets/images/profile/user-0.jpg");
+        user.setPrenom(signUpRequest.getPrenoms());
         user.setRole(role);
 
         userRepository.save(user);
