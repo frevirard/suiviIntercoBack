@@ -156,7 +156,10 @@ public class MetricsController {
 
     @GetMapping("/moyenneTempsCategorie/{cat}")
     public Double getmoyenneTempsCategorie(@PathVariable String cat) {
-        System.out.println(this.projetRepository.findAverageNbjourByCategorie(cat));
-        return this.projetRepository.findAverageNbjourByCategorie(cat);
+        Double result = this.projetRepository.findAverageNbjourByCategorie(cat);
+        if (result == null) {
+            return (double) 0;
+        }
+        return Math.round(result * (double) 100) / (double) 100;
     }
 }
