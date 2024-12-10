@@ -17,4 +17,9 @@ public class Action {
     public String categorie;
     public Boolean notification;
     public String donneurOrdre;
+
+    public String getDonneurOrdre() {
+        return donneurOrdre;
+    }
+
 }

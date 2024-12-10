@@ -11,6 +11,7 @@ public class SignUpRequest {
     private String role;
 
     private String password;
+    private String confirmPassword;
 
     private String nom;
 
@@ -40,6 +41,14 @@ public class SignUpRequest {
 
     public String getPrenoms() {
         return prenoms;
+    }
+
+    public void setConfirmPassword(String confirmPassword) {
+        this.confirmPassword = confirmPassword;
+    }
+
+    public String getConfirmPassword() {
+        return confirmPassword;
     }
 
     public void setEmail(String email) {

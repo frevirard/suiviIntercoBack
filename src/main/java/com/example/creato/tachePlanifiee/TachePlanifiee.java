@@ -28,7 +28,8 @@ public class TachePlanifiee {
                 this.actuNbJour(projet);
             } catch (Exception e) {
                 // TODO: handle exception
-                mail.envoiMailNbJourRéussi("Rafraichissement nb jours échoué pour " + projet.titre);
+                mail.envoiMailNbJourRéussi("Rafraichissement nb jours échoué pour " + projet.titre, "test",
+                        "frevirard@gmail.com");
             }
         }
 
@@ -45,7 +46,8 @@ public class TachePlanifiee {
                 this.actuNbJour(projet);
             } catch (Exception e) {
                 // TODO: handle exception
-                mail.envoiMailNbJourRéussi("Rafraichissement nb jours échoué pour " + projet.titre);
+                mail.envoiMailNbJourRéussi("Rafraichissement nb jours échoué pour " + projet.titre, "test",
+                        "frevirard@gmail.com");
             }
         }
 

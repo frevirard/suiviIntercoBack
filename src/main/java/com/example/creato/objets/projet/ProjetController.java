@@ -5,6 +5,11 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.example.creato.auth.MessageResponse;
+import com.example.creato.mailSender.EnvoiMail;
+import com.example.creato.objets.action.Action;
+import com.example.creato.objets.action.ActionRepository;
+import com.example.creato.objets.donneurOrdre.DonneurOrdre;
+import com.example.creato.objets.donneurOrdre.DonneurOrdreRepository;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -13,6 +18,7 @@ import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import java.util.List;
+import java.util.Optional;
 import java.time.ZonedDateTime;
 import java.time.format.DateTimeFormatter;
 import java.time.temporal.ChronoUnit;
@@ -23,6 +29,10 @@ public class ProjetController {
 
     @Autowired
     ProjetRepository projetRepository;
+    @Autowired
+    ActionRepository actionRepository;
+    @Autowired
+    DonneurOrdreRepository donneurOrdreRepository;
 
     @PostMapping("add")
     public Projet postMethodName(@RequestBody Projet projet) {
@@ -49,6 +59,31 @@ public class ProjetController {
 
         }
 
+        Optional<Action> action = this.actionRepository.findById(projet.idAction);
+        try {
+            if (action.isPresent()) {
+                Optional<DonneurOrdre> ordonneur = this.donneurOrdreRepository
+                        .findByNomComplet(action.get().getDonneurOrdre());
+                if (ordonneur.isPresent() && action.get().notification) {
+                    try {
+                        EnvoiMail mail = new EnvoiMail();
+                        mail.envoiMailNbJourRéussi(
+                                "Suivi de l'action " + action.get().titre,
+                                " Pris en charge par: <strong>" + projet.assignee
+                                        + " </strong> <br> Progression: <strong>" + projet.progression
+                                        + "% </strong> <br> Commentaire: "
+                                        + projet.commentaire,
+                                ordonneur.get().email);
+                    } catch (Exception e) {
+                        System.out.println("email non valide");
+                    }
+                }
+            }
+        } catch (Exception e) {
+            System.out.println("Envoie de mail non effectué");
+        }
+
+        System.out.println("sauvegardé");
         return this.projetRepository.save(projet);
     }
 

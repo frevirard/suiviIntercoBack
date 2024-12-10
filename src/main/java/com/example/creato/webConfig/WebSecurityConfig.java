@@ -61,6 +61,7 @@ public class WebSecurityConfig {
                         .requestMatchers("/", "/home", "/public/**").permitAll() // Public endpoints
                         .requestMatchers("/login").permitAll()
                         .requestMatchers("/auth/signin").permitAll()
+                        .requestMatchers("/auth/register").permitAll()
                         .requestMatchers("/fred").permitAll()
                         .requestMatchers("/fredUpdate").permitAll()
                         .requestMatchers("/inMemory").permitAll()

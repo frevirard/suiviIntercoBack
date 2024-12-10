@@ -29,7 +29,7 @@ public class User {
     private Long id;
     private String userName;
     private String password;
-    private boolean acountVerified;
+    private boolean accountVerified;
     private String email;
     private String nom;
     private String prenom;
@@ -58,6 +58,10 @@ public class User {
 
     }
 
+    public boolean getAccountVerified() {
+        return this.accountVerified;
+    }
+
     public void setNom(String nom) {
         this.nom = nom;
     }
@@ -79,7 +83,7 @@ public class User {
     }
 
     public void setAccountVerified(Boolean bool) {
-        this.acountVerified = bool;
+        this.accountVerified = bool;
     }
 
     public void setEmail(String email) {
